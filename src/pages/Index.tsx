@@ -159,6 +159,7 @@ const Index = () => {
           <CalendarGrid 
             selectedDate={selectedDate}
             selectedResources={selectedResources}
+            selectedView={selectedView}
             onAddAppointment={() => setIsServiceSheetOpen(true)}
           />
         </div>
