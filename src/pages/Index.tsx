@@ -1,16 +1,18 @@
 
 import { useState } from 'react';
-import { Calendar, ChevronLeft, ChevronRight, Filter, Settings, User, Bell, Search } from 'lucide-react';
+import { Calendar, ChevronLeft, ChevronRight, Filter, Settings, User, Bell, Search, Plus, CalendarIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import CalendarGrid from '@/components/CalendarGrid';
 import ResourceSidebar from '@/components/ResourceSidebar';
+import ServiceSelectionSheet from '@/components/ServiceSelectionSheet';
 
 const Index = () => {
   const [selectedDate, setSelectedDate] = useState(new Date(2025, 5, 18)); // June 18, 2025
   const [selectedView, setSelectedView] = useState('day');
   const [selectedResources, setSelectedResources] = useState(['e-working', 'e-3444802']);
+  const [isServiceSheetOpen, setIsServiceSheetOpen] = useState(false);
 
   const formatDate = (date: Date) => {
     return date.toLocaleDateString('pt-BR', { 
@@ -97,20 +99,26 @@ const Index = () => {
               >
                 <ChevronRight className="h-4 w-4" />
               </Button>
-              <h2 className="text-xl font-semibold text-gray-900 ml-4">
-                {formatDate(selectedDate)}
-              </h2>
+              <div className="flex items-center space-x-2 ml-4">
+                <CalendarIcon className="h-5 w-5 text-gray-600" />
+                <h2 className="text-xl font-semibold text-gray-900">
+                  {formatDate(selectedDate)}
+                </h2>
+              </div>
             </div>
           </div>
           
           <div className="flex items-center space-x-2">
-            <Button 
-              variant={selectedView === 'day' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setSelectedView('day')}
-            >
-              Dia
-            </Button>
+            <div className="flex items-center space-x-2">
+              <Settings className="h-4 w-4 text-gray-600" />
+              <Button 
+                variant={selectedView === 'day' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedView('day')}
+              >
+                Dia
+              </Button>
+            </div>
             <Button 
               variant={selectedView === 'week' ? 'default' : 'outline'}
               size="sm"
@@ -129,6 +137,14 @@ const Index = () => {
               <Filter className="h-4 w-4 mr-2" />
               Filtros
             </Button>
+            <Button 
+              className="bg-black text-white hover:bg-gray-800" 
+              size="sm"
+              onClick={() => setIsServiceSheetOpen(true)}
+            >
+              <Plus className="h-4 w-4 mr-2" />
+              Adicionar
+            </Button>
           </div>
         </div>
       </div>
@@ -143,9 +159,15 @@ const Index = () => {
           <CalendarGrid 
             selectedDate={selectedDate}
             selectedResources={selectedResources}
+            onAddAppointment={() => setIsServiceSheetOpen(true)}
           />
         </div>
       </div>
+
+      <ServiceSelectionSheet 
+        isOpen={isServiceSheetOpen} 
+        onClose={() => setIsServiceSheetOpen(false)} 
+      />
     </div>
   );
 };

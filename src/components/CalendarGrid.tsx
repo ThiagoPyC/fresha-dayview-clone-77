@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Clock, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 interface CalendarGridProps {
   selectedDate: Date;
   selectedResources: string[];
+  onAddAppointment: () => void;
 }
 
 interface Appointment {
@@ -20,7 +20,7 @@ interface Appointment {
   status: 'confirmed' | 'pending' | 'cancelled';
 }
 
-const CalendarGrid = ({ selectedDate, selectedResources }: CalendarGridProps) => {
+const CalendarGrid = ({ selectedDate, selectedResources, onAddAppointment }: CalendarGridProps) => {
   const timeSlots = Array.from({ length: 24 }, (_, i) => {
     const hour = i.toString().padStart(2, '0');
     return `${hour}:00`;
@@ -134,6 +134,7 @@ const CalendarGrid = ({ selectedDate, selectedResources }: CalendarGridProps) =>
                       variant="ghost"
                       size="sm"
                       className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 h-6 w-6 p-0"
+                      onClick={onAddAppointment}
                     >
                       <Plus className="h-3 w-3" />
                     </Button>
