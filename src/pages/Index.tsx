@@ -44,13 +44,13 @@ const Index = () => {
               <h1 className="text-2xl font-bold text-gray-900">Fresha Partners</h1>
             </div>
             <nav className="hidden md:flex space-x-6">
-              <a href="#" className="text-purple-600 font-medium border-b-2 border-purple-600 pb-1">
+              <a href="/" className="text-purple-600 font-medium border-b-2 border-purple-600 pb-1">
                 Calendário
               </a>
-              <a href="#" className="text-gray-600 hover:text-gray-900">
+              <a href="/clients" className="text-gray-600 hover:text-gray-900">
                 Clientes
               </a>
-              <a href="#" className="text-gray-600 hover:text-gray-900">
+              <a href="/services" className="text-gray-600 hover:text-gray-900">
                 Serviços
               </a>
               <a href="#" className="text-gray-600 hover:text-gray-900">
